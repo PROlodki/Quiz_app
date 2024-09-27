@@ -1,52 +1,75 @@
-class OneChoiceQuestion:
+class ChoiceQuestion:
     """Класс вопроса с одним ответом"""
 
-    def __init__(self, count=0, subquestions=None, answers=None):
+    def __init__(self, count=1, subquestions=None, answers=None):
+
         super().__init__()
         self.count = count
         self.question = []
+        self.questionIsOne = True
+
         if subquestions is None:
             self.subquestions = []
-        else:
+        elif len(subquestions) == 1:
             self.subquestions = subquestions
+        else:
+            print("Только один вопрос доступен!")
+
         if answers is None:
             self.answers = []
         else:
             self.answers = answers
 
+    def addQuestion(self, quest):
 
+        if self.questionIsOne:
+            self.subquestions = quest
+            self.questionIsOne = False
+        else:
+            print("Только один вопрос доступен!")
 
-    def addQuestion(self):
-        self.count += 1
+    def addAnsver(self, ansv):
 
-    def createOneChoiceQuestion(self):
-        """Создание вопроса с одним ответом"""
-        pass
+        self.answers.append(ansv)
 
+    def createChoiceQuestion(self):
+        if self.count == 1:
+            """Создание вопроса с одним ответом"""
+            self.question.append(self.subquestions)
+            self.question.append(self.answers)
+            self.question.append("single")
+        else:
+            self.question.append(self.subquestions)
+            self.question.append(self.answers)
+            self.question.append("multiple")
 
-class ManyChoiceQuestion:
-    """Класс вопроса с множественным ответом"""
-
-    def __init__(self, count=0):
-        super().__init__()
-        self.count = count
-
-    def addQuestion(self):
-        self.count += 1
-
-    def createManyChoiceQuestion(self):
-        """Создание вопроса с множественным ответом"""
-        pass
+    def show(self):
+        print(self.question[0][0])
+        for i in range(len(self.answers)):
+            print(f"{i+1}) {self.answers[i]}")
 
 
 class ComparisonQuestion:
     """Класс вопроса с сопоставлением"""
 
-    def __init__(self, count=0):
+    def __init__(self, count=0, subquestions=None, answers=None):
+
         super().__init__()
         self.count = count
+        self.question = []
+        self.questionIsOne = True
 
-    def addQuestion(self):
+        if subquestions is None:
+            self.subquestions = []
+        else:
+            self.subquestions = subquestions
+
+        if answers is None:
+            self.answers = []
+        else:
+            self.answers = answers
+
+    def addSubquestion(self):
         self.count += 1
 
     def createComparisonQuestion(self):
@@ -82,4 +105,18 @@ class TestCreator:
 
 
 if __name__ == '__main__':
+    q = ChoiceQuestion(1,["WHY?"], ["Yes", "No", "Because"])
+    q.createChoiceQuestion()
+    #a.show()
+    going = True
+    while(going):
+        print("--------------")
+        print("-----QuiZ-----")
+        print("--------------")
+        q.show()
+        a = []
+        for item in input().split():
+            a.append(item)
+        print(a)
+
     print("end")
