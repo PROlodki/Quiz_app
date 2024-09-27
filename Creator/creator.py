@@ -20,6 +20,7 @@ class ChoiceQuestion:
         else:
             self.answers = answers
 
+    '''
     def addQuestion(self, quest):
 
         if self.questionIsOne:
@@ -43,10 +44,14 @@ class ChoiceQuestion:
             self.question.append(self.answers)
             self.question.append("multiple")
 
+    Check last commit in DB-moduls branch, we don't need this part
+    Delete this part and others where we use it
+    '''
+
     def show(self):
         print(self.question[0][0])
         for i in range(len(self.answers)):
-            print(f"{i+1}) {self.answers[i]}")
+            print(f"{i + 1}) {self.answers[i]}")
 
 
 class ComparisonQuestion:
@@ -105,11 +110,11 @@ class TestCreator:
 
 
 if __name__ == '__main__':
-    q = ChoiceQuestion(1,["WHY?"], ["Yes", "No", "Because"])
+    q = ChoiceQuestion(1, ["WHY?"], ["Yes", "No", "Because"])
     q.createChoiceQuestion()
-    #a.show()
+    # a.show()
     going = True
-    while(going):
+    while (going):
         print("--------------")
         print("-----QuiZ-----")
         print("--------------")
